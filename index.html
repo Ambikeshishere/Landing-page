@@ -33,38 +33,6 @@
         color: #ffffff;
       }
 
-      .menu-bar {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background: rgba(0, 0, 0, 0.1);
-        padding: 10px 20px;
-        border-radius: 5px;
-        backdrop-filter: blur(5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-      }
-
-      .menu-bar ul {
-        list-style: none;
-        display: flex;
-        gap: 20px;
-      }
-
-      .menu-bar ul li {
-        font-size: 1rem;
-      }
-
-      .menu-bar ul li a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      .menu-bar ul li a:hover {
-        color: #ff6b6b;
-      }
-
       .header {
         text-align: center;
         margin-top: 20px;
@@ -97,7 +65,6 @@
         align-items: center;
         border-radius: 50px;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         background-color: #ffffff;
         margin: 20px 0;
         width: 60%;
@@ -128,58 +95,10 @@
       .search-bar button img {
         width: 20px;
         height: 20px;
-        fill: white;
       }
 
       .search-bar button:hover {
         background-color: #ffffff;
-      }
-
-      .suggestions {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-      }
-
-      .suggestion {
-        text-align: center;
-      }
-
-      .suggestion img {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 10px;
-      }
-
-      .suggestion a {
-        color: inherit;
-        text-decoration: none;
-        font-size: 1rem;
-        transition: color 0.3s;
-      }
-
-      .suggestion a:hover {
-        color: #ff6b6b;
-      }
-
-      .weather-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 20px;
-      }
-
-      .weather-section img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .weather-section span {
-        font-size: 1.2rem;
       }
 
       .dark-mode-toggle {
@@ -201,11 +120,6 @@
         background: #e63946;
       }
 
-      .dark-mode-toggle img {
-        width: 20px;
-        height: 20px;
-      }
-
       footer {
         width: 100%;
         position: absolute;
@@ -221,129 +135,9 @@
         background: rgba(240, 240, 240, 0.9);
         color: #333;
       }
-
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      .modal-content {
-        padding: 20px;
-        text-align: center;
-      }
-
-      .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 20px;
-        justify-items: center;
-      }
-
-      .grid-item img {
-        width: 50px;
-        height: 50px;
-        object-fit: contain;
-        transition: transform 0.3s ease-in-out;
-      }
-
-      .grid-item img:hover {
-        transform: scale(1.1);
-      }
-      .about-us-modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 20px;
-      }
-
-      .about-us-modal-content {
-        background-color: white;
-        padding: 30px;
-        max-width: 500px;
-        margin: 50px auto;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        text-align: center;
-      }
-
-      .about-us-modal h2 {
-        margin-bottom: 20px;
-        color: #333;
-      }
-
-      .about-us-modal p {
-        font-size: 1.1rem;
-        margin-bottom: 20px;
-        color: #555;
-      }
-
-      .about-us-modal .close-about-us {
-        font-size: 25px;
-        color: #ff6b6b;
-        cursor: pointer;
-      }
-
-      .close-about-us:hover {
-        color: #e63946;
-      }
-
-      .modal-content h2 {
-        margin-bottom: 20px;
-        text-align: center;
-        color: #000;
-      }
-
-      .modal-content ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .modal-content ul li {
-        margin: 10px 0;
-        text-align: center;
-        color: #000000;
-      }
-
-      .modal-content ul li a {
-        text-decoration: none;
-        color: #000000;
-        font-size: 1.2rem;
-        transition: color 0.3s;
-      }
-
-      .modal-content ul li a:hover {
-        color: #ff6b6b;
-      }
-
-      .close {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 30px;
-        font-weight: bold;
-        color: #333;
-        cursor: pointer;
-      }
-
-      .close:hover {
-        color: #ff6b6b;
-      }
     </style>
   </head>
   <body class="dark">
-    
-
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 
     <div class="header">
@@ -360,7 +154,6 @@
       target="_blank"
     >
       <input type="text" name="q" placeholder="Search the web..." required />
-
       <button type="submit">
         <img
           src="https://imgs.search.brave.com/4NEaI6RgmXqvd-p_esedYzQIh4mBlVsu7G-XDBQgmF0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9k/b3dubG9hZC1ibGFj/ay1zZWFyY2gtaWNv/bi1idXR0b24tcG5n/LTcwMTc1MTY5NDk3/NDkzNDEwNTB4Zmww/ODgucG5nP3Y9MjAy/NDExMjcxMw"
@@ -368,61 +161,6 @@
         />
       </button>
     </form>
-
-    <div class="suggestions">
-      <div class="suggestion">
-        <a href="https://www.spotify.com" target="_blank">
-          <img
-            src="https://imgs.search.brave.com/4x044dhdFnXvnBwkkiFhNWFTI4qYAuTTw3hOWan0tFM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81Nzkvbm9uXzJ4/L3Nwb3RpZnktYXBw/LWxvZ28tc3BvdGlm/eS1pY29uLXRyYW5z/cGFyZW50LWZyZWUt/cG5nLnBuZw"
-            alt="Spotify"
-          />
-        </a>
-      </div>
-      <div class="suggestion">
-        <a href="https://www.youtube.com" target="_blank">
-          <img
-            src="https://imgs.search.brave.com/51sueN5kAnrzEi0LIJVUTr_DPtc383FF6MHQijf6Iw8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81NzIvbm9uXzJ4/L3lvdXR1YmUtbG9n/by15b3V0dWJlLWlj/b24tdHJhbnNwYXJl/bnQtZnJlZS1wbmcu/cG5n"
-            alt="YouTube"
-          />
-         
-        </a>
-      </div>
-      <div class="suggestion">
-        <a href="https://music.youtube.com" target="_blank">
-          <img
-            src="https://imgs.search.brave.com/R27wtjt3yk9lfiM15gMH7xy3ycPFItQ2MXCnTUDkUj4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmFu/ZGxvZ29zLm5ldC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMS8x/MS95b3V0dWJlLW11/c2ljLWxvZ28tMS0z/MDB4MzAwLnBuZw"
-            alt="YouTube Music"
-          />
-          
-        </a>
-      </div>
-      <div class="suggestion">
-        <a href="https://web.whatsapp.com" target="_blank">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-            alt="WhatsApp Web"
-          />
-         
-        </a>
-      </div>
-      <div class="suggestion">
-        <a href="https://ev.io" target="_blank">
-          <img
-            src="https://imgs.search.brave.com/nCDQhr7xiQzhozZuGz1P03LUeV0r9XgyxHBp2KCSev0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/NGouY29tL2Nkbi1j/Z2kvaW1hZ2UvcXVh/bGl0eT03OCxmaXQ9/Y292ZXIsZm9ybWF0/PWF1dG8vdGh1bWIv/MjAyMTAxL0V2LUlv/LmpwZw"
-            alt="ev.io"
-          />
-          
-        </a>
-      </div>
-    </div>
-
-    <div class="weather-section">
-      <img id="weather-icon" src="" alt="Weather" />
-      <span id="weather">Fetching weather...</span>
-      <span id="location">Detecting location...</span>
-    </div>
-
-    <footer id="ip">Fetching IP address...</footer>
 
     <script>
       // Clock
@@ -440,105 +178,16 @@
       }
       setInterval(updateTime, 1000);
 
-      function fetchLocationAndWeather() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            const { latitude, longitude } = position.coords;
-
-            const apiKey = "18cb423f984d7f6e641dc8af34709538";
-            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-            fetch(weatherUrl)
-              .then((response) => response.json())
-              .then((data) => {
-                const { main, weather, name } = data;
-                document.getElementById(
-                  "weather"
-                ).textContent = `${main.temp}°C, ${weather[0].description}`;
-                document.getElementById(
-                  "weather-icon"
-                ).src = `https://imgs.search.brave.com/AKqtObVDqfmoLB0dlkZjBNZNgnb5IpVp0Ap8c-Hsv68/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni84MzU2LzgzNTY2/NDkucG5nP3NlbXQ9/YWlzX2h5YnJpZA`;
-                document.getElementById(
-                  "location"
-                ).textContent = `Location: ${name}`;
-              })
-              .catch(() => {
-                document.getElementById("weather").textContent =
-                  "Unable to fetch weather.";
-                document.getElementById("location").textContent =
-                  "Unable to fetch location.";
-              });
-          });
-        } else {
-          document.getElementById("location").textContent =
-            "Geolocation not supported.";
-        }
-      }
-
-      function fetchIPAddress() {
-        fetch("https://api.ipify.org?format=json")
-          .then((response) => response.json())
-          .then((data) => {
-            document.getElementById(
-              "ip"
-            ).textContent = `IP Address: ${data.ip}`;
-          })
-          .catch(() => {
-            document.getElementById("ip").textContent =
-              "Unable to fetch IP address.";
-          });
-      }
-      const aboutUsLink = document.getElementById("aboutUsLink");
-      const aboutUsModal = document.getElementById("aboutUsModal");
-      const closeAboutUs = document.getElementById("closeAboutUs");
-
-      aboutUsLink.addEventListener("click", function () {
-        aboutUsModal.style.display = "block";
-      });
-
-      closeAboutUs.addEventListener("click", function () {
-        aboutUsModal.style.display = "none";
-      });
-
-      window.addEventListener("click", function (event) {
-        if (event.target === aboutUsModal) {
-          aboutUsModal.style.display = "none";
-        }
-      });
-      const menuLink = document.getElementById("menuLink");
-      const menuModal = document.getElementById("menuModal");
-      const closeModal = document.getElementById("closeModal");
-
-      menuLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        menuModal.style.display = "block";
-      });
-
-      closeModal.addEventListener("click", () => {
-        menuModal.style.display = "none";
-      });
-
-      window.addEventListener("click", (event) => {
-        if (event.target === menuModal) {
-          menuModal.style.display = "none";
-        }
-      });
-
-      const body = document.body;
-      const footer = document.querySelector("footer");
       const darkModeToggle = document.getElementById("darkModeToggle");
-
       darkModeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark");
-        body.classList.toggle("light");
-        footer.classList.toggle("dark");
-        footer.classList.toggle("light");
-        darkModeToggle.textContent = body.classList.contains("dark")
+        document.body.classList.toggle("dark");
+        document.body.classList.toggle("light");
+        document.querySelector("footer").classList.toggle("dark");
+        document.querySelector("footer").classList.toggle("light");
+        darkModeToggle.textContent = document.body.classList.contains("dark")
           ? "Light Mode"
           : "Dark Mode";
       });
-
-      fetchLocationAndWeather();
-      fetchIPAddress();
     </script>
   </body>
 </html>
