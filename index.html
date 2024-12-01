@@ -1,373 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stark Internet Browser</title>
     <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            transition: background 0.3s, color 0.3s;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        transition: background 0.3s, color 0.3s;
+      }
 
-        /* Light and Dark Mode */
-        body.light {
-            background: linear-gradient(135deg, #f0f0f0, #ffffff);
-            color: #333;
-        }
+      /* Light and Dark Mode */
+      body.light {
+        background: linear-gradient(135deg, #f0f0f0, #ffffff);
+        color: #333;
+      }
 
-        body.dark {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
-        }
+      body.dark {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: #ffffff;
+      }
 
-        .menu-bar {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.1);
-            padding: 10px 20px;
-            border-radius: 5px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
+      .menu-bar {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 10px 20px;
+        border-radius: 5px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
 
-        .menu-bar ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
+      .menu-bar ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
 
-        .menu-bar ul li {
-            font-size: 1rem;
-        }
+      .menu-bar ul li {
+        font-size: 1rem;
+      }
 
-        .menu-bar ul li a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+      .menu-bar ul li a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
 
-        .menu-bar ul li a:hover {
-            color: #ff6b6b;
-        }
+      .menu-bar ul li a:hover {
+        color: #ff6b6b;
+      }
 
-        .header {
-            text-align: center;
-            margin-top: 20px;
-        }
+      .header {
+        text-align: center;
+        margin-top: 20px;
+      }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+      }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
 
-        .clock {
-            font-size: 3rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px 40px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-        }
+      .clock {
+        font-size: 3rem;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px 40px;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+      }
 
-        .search-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background-color: #ffffff;
-            margin: 20px 0;
-            width: 60%;
-        }
+      .search-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background-color: #ffffff;
+        margin: 20px 0;
+        width: 60%;
+      }
 
-        .search-bar input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-        }
+      .search-bar input {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+      }
 
-        .search-bar button {
-    padding: 10px;
-    border: none;
-    outline: none;
-    background-color: #ffffff;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+      .search-bar button {
+        padding: 10px;
+        border: none;
+        outline: none;
+        background-color: #ffffff;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-.search-bar button img {
-    width: 20px;
-    height: 20px;
-    fill: white;
-}
+      .search-bar button img {
+        width: 20px;
+        height: 20px;
+        fill: white;
+      }
 
-.search-bar button:hover {
-    background-color: #ffffff;
-}
+      .search-bar button:hover {
+        background-color: #ffffff;
+      }
 
+      /* Website Suggestions */
+      .suggestions {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
 
-        /* Website Suggestions */
-        .suggestions {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
+      .suggestion {
+        text-align: center;
+      }
 
-        .suggestion {
-            text-align: center;
-        }
+      .suggestion img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
 
-        .suggestion img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-        }
+      .suggestion a {
+        color: inherit;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s;
+      }
 
-        .suggestion a {
-            color: inherit;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
+      .suggestion a:hover {
+        color: #ff6b6b;
+      }
 
-        .suggestion a:hover {
-            color: #ff6b6b;
-        }
+      .weather-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+      }
 
-        .weather-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
+      .weather-section img {
+        width: 80px;
+        height: 80px;
+      }
 
-        .weather-section img {
-            width: 80px;
-            height: 80px;
-        }
+      .weather-section span {
+        font-size: 1.2rem;
+      }
 
-        .weather-section span {
-            font-size: 1.2rem;
-        }
+      .dark-mode-toggle {
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        font-size: 1rem;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        background: #ff6b6b;
+        color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s;
+      }
 
-        .dark-mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 80px;
-            font-size: 1rem;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            background: #ff6b6b;
-            color: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s;
-            
-        }
+      .dark-mode-toggle:hover {
+        background: #e63946;
+      }
 
-        .dark-mode-toggle:hover {
-            background: #e63946;
-        }
-        
-        .dark-mode-toggle img {
-            width: 20px;
-            height: 20px;
-        }
+      .dark-mode-toggle img {
+        width: 20px;
+        height: 20px;
+      }
 
-        footer {
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            text-align: center;
-            padding: 10px 0;
-            background: rgba(0, 0, 0, 0.2);
-            color: #ffffff;
-            transition: background 0.3s, color 0.3s;
-        }
+      footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        padding: 10px 0;
+        background: rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+        transition: background 0.3s, color 0.3s;
+      }
 
-        footer.light {
-            background: rgba(240, 240, 240, 0.9);
-            color: #333;
-        }
+      footer.light {
+        background: rgba(240, 240, 240, 0.9);
+        color: #333;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* On top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 70%;
+        max-width: 600px;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .modal-content ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .modal-content ul li {
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .modal-content ul li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1.2rem;
+        transition: color 0.3s;
+      }
+
+      .modal-content ul li a:hover {
+        color: #ff6b6b;
+      }
+
+      /* Close button styles */
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: #ff6b6b;
+      }
     </style>
-</head>
-<body class="dark">
+  </head>
+  <body class="dark">
+    <!-- Menu Bar -->
     <!-- Menu Bar -->
     <nav class="menu-bar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
+      <ul>
+        <li><a href="#" id="menuLink">Menu</a></li>
+        <!-- Changed from Home to Menu -->
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
     </nav>
+
+    <!-- Modal Dialog (hidden initially) -->
+    <div class="modal" id="menuModal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>App Menu</h2>
+        <ul>
+          <li>
+            <a href="https://docs.google.com/spreadsheets/" target="_blank"
+              >Google Sheets</a
+            >
+          </li>
+          <li>
+            <a href="https://docs.google.com/document/" target="_blank"
+              >Google Docs</a
+            >
+          </li>
+          <li>
+            <a href="https://drive.google.com/" target="_blank">Google Drive</a>
+          </li>
+          <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+          <li>
+            <a href="https://music.youtube.com" target="_blank"
+              >YouTube Music</a
+            >
+          </li>
+          <!-- Add more apps here -->
+        </ul>
+      </div>
+    </div>
 
     <!-- Dark Mode Toggle -->
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 
     <!-- Header Section -->
     <div class="header">
-        <h1>Stark Browser</h1>
-        <p>Explore the web with speed and style</p>
+      <h1>Stark Browser</h1>
+      <p>Explore the web with speed and style</p>
     </div>
 
     <!-- Clock -->
     <div class="clock" id="clock">Loading time...</div>
 
     <!-- Search Bar -->
-    <form class="search-bar" action="https://duckduckgo.com/" method="get" target="_blank">
-        <input type="text" name="q" placeholder="Search the web..." required>
-        <!-- Search Button with logo -->
-            <button type="submit">
-                <img src="https://imgs.search.brave.com/4NEaI6RgmXqvd-p_esedYzQIh4mBlVsu7G-XDBQgmF0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9k/b3dubG9hZC1ibGFj/ay1zZWFyY2gtaWNv/bi1idXR0b24tcG5n/LTcwMTc1MTY5NDk3/NDkzNDEwNTB4Zmww/ODgucG5nP3Y9MjAy/NDExMjcxMw" alt="Search" />
-            </button>            
+    <form
+      class="search-bar"
+      action="https://duckduckgo.com/"
+      method="get"
+      target="_blank"
+    >
+      <input type="text" name="q" placeholder="Search the web..." required />
+      <!-- Search Button with logo -->
+      <button type="submit">
+        <img
+          src="https://imgs.search.brave.com/4NEaI6RgmXqvd-p_esedYzQIh4mBlVsu7G-XDBQgmF0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9k/b3dubG9hZC1ibGFj/ay1zZWFyY2gtaWNv/bi1idXR0b24tcG5n/LTcwMTc1MTY5NDk3/NDkzNDEwNTB4Zmww/ODgucG5nP3Y9MjAy/NDExMjcxMw"
+          alt="Search"
+        />
+      </button>
     </form>
-    
 
     <!-- Website Suggestions -->
     <div class="suggestions">
-        <div class="suggestion">
-            <a href="https://www.spotify.com" target="_blank">
-                <img src="https://imgs.search.brave.com/4x044dhdFnXvnBwkkiFhNWFTI4qYAuTTw3hOWan0tFM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81Nzkvbm9uXzJ4/L3Nwb3RpZnktYXBw/LWxvZ28tc3BvdGlm/eS1pY29uLXRyYW5z/cGFyZW50LWZyZWUt/cG5nLnBuZw" alt="Spotify">
-                <p>Spotify</p>
-            </a>
-        </div>
-        <div class="suggestion">
-            <a href="https://www.youtube.com" target="_blank">
-                <img src="https://imgs.search.brave.com/51sueN5kAnrzEi0LIJVUTr_DPtc383FF6MHQijf6Iw8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81NzIvbm9uXzJ4/L3lvdXR1YmUtbG9n/by15b3V0dWJlLWlj/b24tdHJhbnNwYXJl/bnQtZnJlZS1wbmcu/cG5n" alt="YouTube">
-                <p>YouTube</p>
-            </a>
-        </div>
-        <div class="suggestion">
-            <a href="https://music.youtube.com" target="_blank">
-                <img src="https://imgs.search.brave.com/R27wtjt3yk9lfiM15gMH7xy3ycPFItQ2MXCnTUDkUj4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmFu/ZGxvZ29zLm5ldC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMS8x/MS95b3V0dWJlLW11/c2ljLWxvZ28tMS0z/MDB4MzAwLnBuZw" alt="YouTube Music">
-                <p>YouTube Music</p>
-            </a>
-        </div>
-        <div class="suggestion">
-            <a href="https://web.whatsapp.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Web">
-                <p>WhatsApp Web</p>
-            </a>
-        </div>
-        <div class="suggestion">
-            <a href="https://ev.io" target="_blank">
-                <img src="https://imgs.search.brave.com/nCDQhr7xiQzhozZuGz1P03LUeV0r9XgyxHBp2KCSev0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/NGouY29tL2Nkbi1j/Z2kvaW1hZ2UvcXVh/bGl0eT03OCxmaXQ9/Y292ZXIsZm9ybWF0/PWF1dG8vdGh1bWIv/MjAyMTAxL0V2LUlv/LmpwZw" alt="ev.io">
-                <p>ev.io</p>
-            </a>
-        </div>
+      <div class="suggestion">
+        <a href="https://www.spotify.com" target="_blank">
+          <img
+            src="https://imgs.search.brave.com/4x044dhdFnXvnBwkkiFhNWFTI4qYAuTTw3hOWan0tFM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81Nzkvbm9uXzJ4/L3Nwb3RpZnktYXBw/LWxvZ28tc3BvdGlm/eS1pY29uLXRyYW5z/cGFyZW50LWZyZWUt/cG5nLnBuZw"
+            alt="Spotify"
+          />
+          <p>Spotify</p>
+        </a>
+      </div>
+      <div class="suggestion">
+        <a href="https://www.youtube.com" target="_blank">
+          <img
+            src="https://imgs.search.brave.com/51sueN5kAnrzEi0LIJVUTr_DPtc383FF6MHQijf6Iw8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81NzIvbm9uXzJ4/L3lvdXR1YmUtbG9n/by15b3V0dWJlLWlj/b24tdHJhbnNwYXJl/bnQtZnJlZS1wbmcu/cG5n"
+            alt="YouTube"
+          />
+          <p>YouTube</p>
+        </a>
+      </div>
+      <div class="suggestion">
+        <a href="https://music.youtube.com" target="_blank">
+          <img
+            src="https://imgs.search.brave.com/R27wtjt3yk9lfiM15gMH7xy3ycPFItQ2MXCnTUDkUj4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmFu/ZGxvZ29zLm5ldC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMS8x/MS95b3V0dWJlLW11/c2ljLWxvZ28tMS0z/MDB4MzAwLnBuZw"
+            alt="YouTube Music"
+          />
+          <p>YouTube Music</p>
+        </a>
+      </div>
+      <div class="suggestion">
+        <a href="https://web.whatsapp.com" target="_blank">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+            alt="WhatsApp Web"
+          />
+          <p>WhatsApp Web</p>
+        </a>
+      </div>
+      <div class="suggestion">
+        <a href="https://ev.io" target="_blank">
+          <img
+            src="https://imgs.search.brave.com/nCDQhr7xiQzhozZuGz1P03LUeV0r9XgyxHBp2KCSev0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/NGouY29tL2Nkbi1j/Z2kvaW1hZ2UvcXVh/bGl0eT03OCxmaXQ9/Y292ZXIsZm9ybWF0/PWF1dG8vdGh1bWIv/MjAyMTAxL0V2LUlv/LmpwZw"
+            alt="ev.io"
+          />
+          <p>ev.io</p>
+        </a>
+      </div>
     </div>
 
     <!-- Weather and Location -->
     <div class="weather-section">
-        <img id="weather-icon" src="" alt="Weather" />
-        <span id="weather">Fetching weather...</span>
-        <span id="location">Detecting location...</span>
+      <img id="weather-icon" src="" alt="Weather" />
+      <span id="weather">Fetching weather...</span>
+      <span id="location">Detecting location...</span>
     </div>
 
     <!-- Footer -->
     <footer id="ip">Fetching IP address...</footer>
 
     <script>
-        // Clock
-        function updateTime() {
-            const now = new Date();
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('clock').textContent = now.toLocaleTimeString([], options);
+      // Clock
+      function updateTime() {
+        const now = new Date();
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        document.getElementById("clock").textContent = now.toLocaleTimeString(
+          [],
+          options
+        );
+      }
+      setInterval(updateTime, 1000);
+
+      // Location and Weather
+      function fetchLocationAndWeather() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+
+            // Weather and City API
+            const apiKey = "18cb423f984d7f6e641dc8af34709538"; // Replace with OpenWeatherMap API Key
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+            fetch(weatherUrl)
+              .then((response) => response.json())
+              .then((data) => {
+                const { main, weather, name } = data;
+                document.getElementById(
+                  "weather"
+                ).textContent = `${main.temp}°C, ${weather[0].description}`;
+                document.getElementById(
+                  "weather-icon"
+                ).src = `https://imgs.search.brave.com/AKqtObVDqfmoLB0dlkZjBNZNgnb5IpVp0Ap8c-Hsv68/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni84MzU2LzgzNTY2/NDkucG5nP3NlbXQ9/YWlzX2h5YnJpZA`;
+                document.getElementById(
+                  "location"
+                ).textContent = `Location: ${name}`;
+              })
+              .catch(() => {
+                document.getElementById("weather").textContent =
+                  "Unable to fetch weather.";
+                document.getElementById("location").textContent =
+                  "Unable to fetch location.";
+              });
+          });
+        } else {
+          document.getElementById("location").textContent =
+            "Geolocation not supported.";
         }
-        setInterval(updateTime, 1000);
+      }
 
-        // Location and Weather
-        function fetchLocationAndWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const { latitude, longitude } = position.coords;
+      // IP Address
+      function fetchIPAddress() {
+        fetch("https://api.ipify.org?format=json")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(
+              "ip"
+            ).textContent = `IP Address: ${data.ip}`;
+          })
+          .catch(() => {
+            document.getElementById("ip").textContent =
+              "Unable to fetch IP address.";
+          });
+      }
+      // Get the modal and button elements
+      const menuLink = document.getElementById("menuLink");
+      const menuModal = document.getElementById("menuModal");
+      const closeModal = document.getElementById("closeModal");
 
-                    // Weather and City API
-                    const apiKey = '18cb423f984d7f6e641dc8af34709538'; // Replace with OpenWeatherMap API Key
-                    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-                    fetch(weatherUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            const { main, weather, name } = data;
-                            document.getElementById('weather').textContent = `${main.temp}°C, ${weather[0].description}`;
-                            document.getElementById('weather-icon').src = `https://imgs.search.brave.com/AKqtObVDqfmoLB0dlkZjBNZNgnb5IpVp0Ap8c-Hsv68/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni84MzU2LzgzNTY2/NDkucG5nP3NlbXQ9/YWlzX2h5YnJpZA`;
-                            document.getElementById('location').textContent = `Location: ${name}`;
-                        })
-                        .catch(() => {
-                            document.getElementById('weather').textContent = 'Unable to fetch weather.';
-                            document.getElementById('location').textContent = 'Unable to fetch location.';
-                        });
-                });
-            } else {
-                document.getElementById('location').textContent = 'Geolocation not supported.';
-            }
+      // When the "Menu" link is clicked, open the modal
+      menuLink.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        menuModal.style.display = "block"; // Show the modal
+      });
+
+      // When the close button is clicked, close the modal
+      closeModal.addEventListener("click", () => {
+        menuModal.style.display = "none"; // Hide the modal
+      });
+
+      // When clicking outside of the modal content, close the modal
+      window.addEventListener("click", (event) => {
+        if (event.target === menuModal) {
+          menuModal.style.display = "none"; // Hide the modal if the area outside the modal content is clicked
         }
+      });
 
-        // IP Address
-        function fetchIPAddress() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('ip').textContent = `IP Address: ${data.ip}`;
-                })
-                .catch(() => {
-                    document.getElementById('ip').textContent = 'Unable to fetch IP address.';
-                });
-        }
+      // Dark Mode Toggle
+      const body = document.body;
+      const footer = document.querySelector("footer");
+      const darkModeToggle = document.getElementById("darkModeToggle");
 
-        // Dark Mode Toggle
-        const body = document.body;
-        const footer = document.querySelector('footer');
-        const darkModeToggle = document.getElementById('darkModeToggle');
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        body.classList.toggle("light");
+        footer.classList.toggle("dark");
+        footer.classList.toggle("light");
+        darkModeToggle.textContent = body.classList.contains("dark")
+          ? "Light Mode"
+          : "Dark Mode";
+      });
 
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            body.classList.toggle('light');
-            footer.classList.toggle('dark');
-            footer.classList.toggle('light');
-            darkModeToggle.textContent = body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
-        });
-
-        // Initialize
-        fetchLocationAndWeather();
-        fetchIPAddress();
+      // Initialize
+      fetchLocationAndWeather();
+      fetchIPAddress();
     </script>
-</body>
+  </body>
 </html>
