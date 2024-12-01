@@ -238,17 +238,77 @@
       }
 
       .modal-content {
-        background-color: #fff;
-        margin: 10% auto;
         padding: 20px;
+        text-align: center;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(100px, 1fr)
+        ); /* Auto adjust based on available space */
+        gap: 20px;
+        justify-items: center;
+      }
+
+      .grid-item img {
+        width: 50px; /* Adjust size as needed */
+        height: 50px; /* Adjust size as needed */
+        object-fit: contain;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .grid-item img:hover {
+        transform: scale(1.1); /* Add a slight zoom effect on hover */
+      }
+      .about-us-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* On top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgba(0, 0, 0, 0.7); /* Black with transparency */
+        padding: 20px;
+      }
+
+      .about-us-modal-content {
+        background-color: white;
+        padding: 30px;
+        max-width: 500px;
+        margin: 50px auto;
         border-radius: 10px;
-        width: 70%;
-        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .about-us-modal h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .about-us-modal p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      .about-us-modal .close-about-us {
+        font-size: 25px;
+        color: #ff6b6b;
+        cursor: pointer;
+      }
+
+      .close-about-us:hover {
+        color: #e63946;
       }
 
       .modal-content h2 {
         margin-bottom: 20px;
         text-align: center;
+        color: #000;
       }
 
       .modal-content ul {
@@ -259,11 +319,12 @@
       .modal-content ul li {
         margin: 10px 0;
         text-align: center;
+        color: #000000;
       }
 
       .modal-content ul li a {
         text-decoration: none;
-        color: #333;
+        color: #000000;
         font-size: 1.2rem;
         transition: color 0.3s;
       }
@@ -295,7 +356,7 @@
       <ul>
         <li><a href="#" id="menuLink">Menu</a></li>
         <!-- Changed from Home to Menu -->
-        <li><a href="#">About Us</a></li>
+        <li><a href="#" id="aboutUsLink">About Us</a></li>
         <li><a href="#">Settings</a></li>
       </ul>
     </nav>
@@ -305,28 +366,67 @@
       <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
         <h2>App Menu</h2>
-        <ul>
-          <li>
-            <a href="https://docs.google.com/spreadsheets/" target="_blank"
-              >Google Sheets</a
-            >
-          </li>
-          <li>
-            <a href="https://docs.google.com/document/" target="_blank"
-              >Google Docs</a
-            >
-          </li>
-          <li>
-            <a href="https://drive.google.com/" target="_blank">Google Drive</a>
-          </li>
-          <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
-          <li>
-            <a href="https://music.youtube.com" target="_blank"
-              >YouTube Music</a
-            >
-          </li>
-          <!-- Add more apps here -->
-        </ul>
+        <div class="grid-container">
+          <div class="grid-item">
+            <a href="https://docs.google.com/spreadsheets/" target="_blank">
+              <img
+                src="https://imgs.search.brave.com/3-qIgI1VtGWD0-GluN-vkPtlUPUwfcZvNUzWbBvPH0E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYWls/bWV0ZW9yLmNvbS9s/b2dvcy9hc3NldHMv/UE5HL0dvb2dsZV9T/aGVldHNfTG9nb18x/MjhweC5wbmc"
+                alt="Google Sheets"
+              />
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="https://docs.google.com/document/" target="_blank">
+              <img
+                src="https://imgs.search.brave.com/4USpaQpVaF1-ZnX2NH3Txx8XlDadwTbNV5Iu4P30Cq0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYWls/bWV0ZW9yLmNvbS9s/b2dvcy9hc3NldHMv/UE5HL0dvb2dsZV9E/b2NzX0xvZ29fMTI4/cHgucG5n"
+                alt="Google Docs"
+              />
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="https://drive.google.com/" target="_blank">
+              <img
+                src="https://imgs.search.brave.com/adycMhWhTqLGXEzdiVWj85t0f7FKhLJgWTTKe_Zrg3k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYWls/bWV0ZW9yLmNvbS9s/b2dvcy9hc3NldHMv/UE5HL0dvb2dsZV9E/cml2ZV9Mb2dvXzEy/OHB4LnBuZw"
+                alt="Google Drive"
+              />
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="https://www.youtube.com" target="_blank">
+              <img
+                src="https://imgs.search.brave.com/51sueN5kAnrzEi0LIJVUTr_DPtc383FF6MHQijf6Iw8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81NzIvbm9uXzJ4/L3lvdXR1YmUtbG9n/by15b3V0dWJlLWlj/b24tdHJhbnNwYXJl/bnQtZnJlZS1wbmcu/cG5n"
+                alt="YouTube"
+              />
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="https://music.youtube.com" target="_blank">
+              <img
+                src="https://imgs.search.brave.com/MRHYV3JMvNsGFUfP4meh11A9rCtwfdsne6yjqljzOTc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/cy13b3JsZC5uZXQv/d3AtY29udGVudC91/cGxvYWRzLzIwMjEv/MDQvWW91dHViZS1N/dXNpYy1Mb2dvLTcw/MHgzOTQucG5n"
+                alt="YouTube Music"
+              />
+            </a>
+          </div>
+          <!-- Add more items as needed -->
+        </div>
+      </div>
+    </div>
+    <div class="about-us-modal" id="aboutUsModal">
+      <div class="about-us-modal-content">
+        <span class="close-about-us" id="closeAboutUs">&times;</span>
+        <h2>About Stark Browser</h2>
+        <p>
+          Stark Browser is a lightweight, fast, and stylish web browser designed
+          to provide a seamless browsing experience. It features a clean
+          interface with customizable options, including dark mode and
+          personalized suggestions.
+        </p>
+        <p>
+          <strong>About Me:</strong> I am a web developer passionate about
+          creating intuitive and beautiful user interfaces. Stark Browser is the
+          result of my continuous efforts to enhance the browsing experience for
+          users worldwide.
+        </p>
       </div>
     </div>
 
@@ -484,6 +584,26 @@
               "Unable to fetch IP address.";
           });
       }
+      const aboutUsLink = document.getElementById("aboutUsLink");
+      const aboutUsModal = document.getElementById("aboutUsModal");
+      const closeAboutUs = document.getElementById("closeAboutUs");
+
+      // Open About Us Modal
+      aboutUsLink.addEventListener("click", function () {
+        aboutUsModal.style.display = "block";
+      });
+
+      // Close About Us Modal
+      closeAboutUs.addEventListener("click", function () {
+        aboutUsModal.style.display = "none";
+      });
+
+      // Close the modal when clicking outside of the modal content
+      window.addEventListener("click", function (event) {
+        if (event.target === aboutUsModal) {
+          aboutUsModal.style.display = "none";
+        }
+      });
       // Get the modal and button elements
       const menuLink = document.getElementById("menuLink");
       const menuModal = document.getElementById("menuModal");
