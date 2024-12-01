@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stark Internet Browser</title>
     <style>
-  
       * {
         margin: 0;
         padding: 0;
@@ -24,7 +23,6 @@
         transition: background 0.3s, color 0.3s;
       }
 
-      
       body.light {
         background: linear-gradient(135deg, #f0f0f0, #ffffff);
         color: #333;
@@ -137,7 +135,6 @@
         background-color: #ffffff;
       }
 
-      
       .suggestions {
         display: flex;
         justify-content: center;
@@ -225,16 +222,15 @@
         color: #333;
       }
 
-      
       .modal {
-        display: none; 
-        position: fixed; 
+        display: none;
+        position: fixed;
         z-index: 1000;
         left: 0;
         top: 0;
         width: 100%;
-        height: 100%; 
-        background-color: rgba(0, 0, 0, 0.5); 
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
       }
 
       .modal-content {
@@ -244,33 +240,30 @@
 
       .grid-container {
         display: grid;
-        grid-template-columns: repeat(
-          auto-fill,
-          minmax(100px, 1fr)
-        ); 
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         gap: 20px;
         justify-items: center;
       }
 
       .grid-item img {
-        width: 50px; 
-        height: 50px; 
+        width: 50px;
+        height: 50px;
         object-fit: contain;
         transition: transform 0.3s ease-in-out;
       }
 
       .grid-item img:hover {
-        transform: scale(1.1); 
+        transform: scale(1.1);
       }
       .about-us-modal {
-        display: none; 
+        display: none;
         position: fixed;
-        z-index: 1000; 
+        z-index: 1000;
         left: 0;
         top: 0;
-        width: 100%; 
-        height: 100%; 
-        background-color: rgba(0, 0, 0, 0.7); 
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
         padding: 20px;
       }
 
@@ -333,7 +326,6 @@
         color: #ff6b6b;
       }
 
-      /* Close button styles */
       .close {
         position: absolute;
         top: 10px;
@@ -350,18 +342,14 @@
     </style>
   </head>
   <body class="dark">
-    
-    
     <nav class="menu-bar">
       <ul>
         <li><a href="#" id="menuLink">Menu</a></li>
-        
+
         <li><a href="#" id="aboutUsLink">About Us</a></li>
-        <li><a href="#">Settings</a></li>
       </ul>
     </nav>
 
-    
     <div class="modal" id="menuModal">
       <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
@@ -407,7 +395,6 @@
               />
             </a>
           </div>
-          
         </div>
       </div>
     </div>
@@ -430,19 +417,15 @@
       </div>
     </div>
 
-    
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 
-    
     <div class="header">
       <h1>Stark Browser</h1>
       <p>Explore the web with speed and style</p>
     </div>
 
-    
     <div class="clock" id="clock">Loading time...</div>
 
-    
     <form
       class="search-bar"
       action="https://duckduckgo.com/"
@@ -450,7 +433,7 @@
       target="_blank"
     >
       <input type="text" name="q" placeholder="Search the web..." required />
-      
+
       <button type="submit">
         <img
           src="https://imgs.search.brave.com/4NEaI6RgmXqvd-p_esedYzQIh4mBlVsu7G-XDBQgmF0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9k/b3dubG9hZC1ibGFj/ay1zZWFyY2gtaWNv/bi1idXR0b24tcG5n/LTcwMTc1MTY5NDk3/NDkzNDEwNTB4Zmww/ODgucG5nP3Y9MjAy/NDExMjcxMw"
@@ -459,7 +442,6 @@
       </button>
     </form>
 
-    
     <div class="suggestions">
       <div class="suggestion">
         <a href="https://www.spotify.com" target="_blank">
@@ -508,14 +490,12 @@
       </div>
     </div>
 
-    
     <div class="weather-section">
       <img id="weather-icon" src="" alt="Weather" />
       <span id="weather">Fetching weather...</span>
       <span id="location">Detecting location...</span>
     </div>
 
-    
     <footer id="ip">Fetching IP address...</footer>
 
     <script>
@@ -534,14 +514,12 @@
       }
       setInterval(updateTime, 1000);
 
-      // Location and Weather
       function fetchLocationAndWeather() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
 
-            // Weather and City API
-            const apiKey = "18cb423f984d7f6e641dc8af34709538"; // Replace with OpenWeatherMap API Key
+            const apiKey = "18cb423f984d7f6e641dc8af34709538";
             const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
             fetch(weatherUrl)
               .then((response) => response.json())
@@ -570,7 +548,6 @@
         }
       }
 
-      // IP Address
       function fetchIPAddress() {
         fetch("https://api.ipify.org?format=json")
           .then((response) => response.json())
@@ -588,46 +565,38 @@
       const aboutUsModal = document.getElementById("aboutUsModal");
       const closeAboutUs = document.getElementById("closeAboutUs");
 
-      // Open About Us Modal
       aboutUsLink.addEventListener("click", function () {
         aboutUsModal.style.display = "block";
       });
 
-      // Close About Us Modal
       closeAboutUs.addEventListener("click", function () {
         aboutUsModal.style.display = "none";
       });
 
-      // Close the modal when clicking outside of the modal content
       window.addEventListener("click", function (event) {
         if (event.target === aboutUsModal) {
           aboutUsModal.style.display = "none";
         }
       });
-      // Get the modal and button elements
       const menuLink = document.getElementById("menuLink");
       const menuModal = document.getElementById("menuModal");
       const closeModal = document.getElementById("closeModal");
 
-      // When the "Menu" link is clicked, open the modal
       menuLink.addEventListener("click", (event) => {
-        event.preventDefault(); // Prevent default link behavior
-        menuModal.style.display = "block"; // Show the modal
+        event.preventDefault();
+        menuModal.style.display = "block";
       });
 
-      // When the close button is clicked, close the modal
       closeModal.addEventListener("click", () => {
-        menuModal.style.display = "none"; 
+        menuModal.style.display = "none";
       });
 
-      
       window.addEventListener("click", (event) => {
         if (event.target === menuModal) {
-          menuModal.style.display = "none"; 
+          menuModal.style.display = "none";
         }
       });
 
-      
       const body = document.body;
       const footer = document.querySelector("footer");
       const darkModeToggle = document.getElementById("darkModeToggle");
@@ -642,7 +611,6 @@
           : "Dark Mode";
       });
 
-      
       fetchLocationAndWeather();
       fetchIPAddress();
     </script>
