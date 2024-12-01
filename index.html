@@ -14,31 +14,83 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            color: #ffffff;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             height: 100vh;
-            overflow: hidden;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+            position: relative;
+            transition: background 0.3s, color 0.3s;
         }
 
-        .container {
+        /* Light and Dark Mode */
+        body.light {
+            background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            color: #333;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+        }
+
+        .menu-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .menu-bar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu-bar ul li {
+            font-size: 1rem;
+        }
+
+        .menu-bar ul li a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .menu-bar ul li a:hover {
+            color: #ff6b6b;
+        }
+
+        .header {
             text-align: center;
-            max-width: 600px;
+            margin-top: 20px;
         }
 
-        h1 {
+        .header h1 {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
 
-        p {
+        .header p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
+            opacity: 0.9;
+        }
+
+        .clock {
+            font-size: 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
         }
 
         .search-bar {
@@ -49,6 +101,8 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             background-color: #ffffff;
+            margin: 20px 0;
+            width: 60%;
         }
 
         .search-bar input {
@@ -60,37 +114,260 @@
         }
 
         .search-bar button {
-            padding: 0 20px;
-            border: none;
-            outline: none;
-            background-color: #ff6b6b;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar button img {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.search-bar button:hover {
+    background-color: #ffffff;
+}
+
+
+        /* Website Suggestions */
+        .suggestions {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
-        .search-bar button:hover {
-            background-color: #e63946;
+        .suggestion {
+            text-align: center;
+        }
+
+        .suggestion img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .suggestion a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .suggestion a:hover {
+            color: #ff6b6b;
+        }
+
+        .weather-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .weather-section img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .weather-section span {
+            font-size: 1.2rem;
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            background: #ff6b6b;
+            color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+            
+        }
+
+        .dark-mode-toggle:hover {
+            background: #e63946;
+        }
+        
+        .dark-mode-toggle img {
+            width: 20px;
+            height: 20px;
         }
 
         footer {
+            width: 100%;
             position: absolute;
-            bottom: 10px;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            bottom: 0;
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        footer.light {
+            background: rgba(240, 240, 240, 0.9);
+            color: #333;
         }
     </style>
 </head>
-<body>
-    <div class="container">
+<body class="dark">
+    <!-- Menu Bar -->
+    <nav class="menu-bar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+
+    <!-- Header Section -->
+    <div class="header">
         <h1>Stark Browser</h1>
-        <p>Explore the web with speed and privacy</p>
-        <div class="search-bar">
-            <input type="text" placeholder="Search the web...">
-            <button>Search</button>
+        <p>Explore the web with speed and style</p>
+    </div>
+
+    <!-- Clock -->
+    <div class="clock" id="clock">Loading time...</div>
+
+    <!-- Search Bar -->
+    <form class="search-bar" action="https://duckduckgo.com/" method="get" target="_blank">
+        <input type="text" name="q" placeholder="Search the web..." required>
+        <!-- Search Button with logo -->
+            <button type="submit">
+                <img src="https://imgs.search.brave.com/4NEaI6RgmXqvd-p_esedYzQIh4mBlVsu7G-XDBQgmF0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9k/b3dubG9hZC1ibGFj/ay1zZWFyY2gtaWNv/bi1idXR0b24tcG5n/LTcwMTc1MTY5NDk3/NDkzNDEwNTB4Zmww/ODgucG5nP3Y9MjAy/NDExMjcxMw" alt="Search" />
+            </button>            
+    </form>
+    
+
+    <!-- Website Suggestions -->
+    <div class="suggestions">
+        <div class="suggestion">
+            <a href="https://www.spotify.com" target="_blank">
+                <img src="https://imgs.search.brave.com/4x044dhdFnXvnBwkkiFhNWFTI4qYAuTTw3hOWan0tFM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81Nzkvbm9uXzJ4/L3Nwb3RpZnktYXBw/LWxvZ28tc3BvdGlm/eS1pY29uLXRyYW5z/cGFyZW50LWZyZWUt/cG5nLnBuZw" alt="Spotify">
+                <p>Spotify</p>
+            </a>
+        </div>
+        <div class="suggestion">
+            <a href="https://www.youtube.com" target="_blank">
+                <img src="https://imgs.search.brave.com/51sueN5kAnrzEi0LIJVUTr_DPtc383FF6MHQijf6Iw8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDE4Lzkz/MC81NzIvbm9uXzJ4/L3lvdXR1YmUtbG9n/by15b3V0dWJlLWlj/b24tdHJhbnNwYXJl/bnQtZnJlZS1wbmcu/cG5n" alt="YouTube">
+                <p>YouTube</p>
+            </a>
+        </div>
+        <div class="suggestion">
+            <a href="https://music.youtube.com" target="_blank">
+                <img src="https://imgs.search.brave.com/R27wtjt3yk9lfiM15gMH7xy3ycPFItQ2MXCnTUDkUj4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmFu/ZGxvZ29zLm5ldC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMS8x/MS95b3V0dWJlLW11/c2ljLWxvZ28tMS0z/MDB4MzAwLnBuZw" alt="YouTube Music">
+                <p>YouTube Music</p>
+            </a>
+        </div>
+        <div class="suggestion">
+            <a href="https://web.whatsapp.com" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Web">
+                <p>WhatsApp Web</p>
+            </a>
+        </div>
+        <div class="suggestion">
+            <a href="https://ev.io" target="_blank">
+                <img src="https://imgs.search.brave.com/nCDQhr7xiQzhozZuGz1P03LUeV0r9XgyxHBp2KCSev0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/NGouY29tL2Nkbi1j/Z2kvaW1hZ2UvcXVh/bGl0eT03OCxmaXQ9/Y292ZXIsZm9ybWF0/PWF1dG8vdGh1bWIv/MjAyMTAxL0V2LUlv/LmpwZw" alt="ev.io">
+                <p>ev.io</p>
+            </a>
         </div>
     </div>
-    <footer>© 2024 Stark Browser</footer>
+
+    <!-- Weather and Location -->
+    <div class="weather-section">
+        <img id="weather-icon" src="" alt="Weather" />
+        <span id="weather">Fetching weather...</span>
+        <span id="location">Detecting location...</span>
+    </div>
+
+    <!-- Footer -->
+    <footer id="ip">Fetching IP address...</footer>
+
+    <script>
+        // Clock
+        function updateTime() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('clock').textContent = now.toLocaleTimeString([], options);
+        }
+        setInterval(updateTime, 1000);
+
+        // Location and Weather
+        function fetchLocationAndWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+
+                    // Weather and City API
+                    const apiKey = '18cb423f984d7f6e641dc8af34709538'; // Replace with OpenWeatherMap API Key
+                    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+                    fetch(weatherUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const { main, weather, name } = data;
+                            document.getElementById('weather').textContent = `${main.temp}°C, ${weather[0].description}`;
+                            document.getElementById('weather-icon').src = `https://imgs.search.brave.com/AKqtObVDqfmoLB0dlkZjBNZNgnb5IpVp0Ap8c-Hsv68/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni84MzU2LzgzNTY2/NDkucG5nP3NlbXQ9/YWlzX2h5YnJpZA`;
+                            document.getElementById('location').textContent = `Location: ${name}`;
+                        })
+                        .catch(() => {
+                            document.getElementById('weather').textContent = 'Unable to fetch weather.';
+                            document.getElementById('location').textContent = 'Unable to fetch location.';
+                        });
+                });
+            } else {
+                document.getElementById('location').textContent = 'Geolocation not supported.';
+            }
+        }
+
+        // IP Address
+        function fetchIPAddress() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').textContent = `IP Address: ${data.ip}`;
+                })
+                .catch(() => {
+                    document.getElementById('ip').textContent = 'Unable to fetch IP address.';
+                });
+        }
+
+        // Dark Mode Toggle
+        const body = document.body;
+        const footer = document.querySelector('footer');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            body.classList.toggle('light');
+            footer.classList.toggle('dark');
+            footer.classList.toggle('light');
+            darkModeToggle.textContent = body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+        });
+
+        // Initialize
+        fetchLocationAndWeather();
+        fetchIPAddress();
+    </script>
 </body>
 </html>
