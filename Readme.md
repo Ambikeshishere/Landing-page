@@ -1,1 +1,1 @@
-This is landing page of a broser
+This is landing page of a browser
