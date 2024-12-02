@@ -97,6 +97,45 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* News Section */
+    .news {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 300px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .news h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+
+    .news ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .news li {
+      margin-bottom: 8px;
+    }
+
+    .news li a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .news li a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -110,6 +149,14 @@
   <div class="content">
     <h1>Welcome to Stark Browser</h1>
     <div class="clock" id="clock"></div>
+  </div>
+
+  <!-- News Section -->
+  <div class="news" id="news">
+    <h2>Latest News</h2>
+    <ul id="news-list">
+      <!-- News items will be populated here -->
+    </ul>
   </div>
 
   <!-- Footer -->
@@ -127,9 +174,37 @@
       document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
     }
 
-    // Update clock every second
+    // Fetch and display news from an API
+    async function fetchNews() {
+      const apiKey = 'fc48810710784625bb710d9e80934499'; // Replace with your News API key
+      const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+      
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const newsList = document.getElementById('news-list');
+        newsList.innerHTML = ''; // Clear existing news
+
+        if (data.articles) {
+          data.articles.slice(0, 5).forEach(article => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
+            newsList.appendChild(li);
+          });
+        } else {
+          newsList.innerHTML = '<li>No news available</li>';
+        }
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        document.getElementById('news-list').innerHTML = '<li>Unable to fetch news</li>';
+      }
+    }
+
+    // Initialize features
     setInterval(updateClock, 1000);
     updateClock();
+    fetchNews(); // Call this to load news when the page loads
   </script>
 </body>
 </html>
