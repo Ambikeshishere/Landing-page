@@ -19,15 +19,18 @@
       overflow: hidden;
     }
 
-    /* Full-screen background video */
-    #background-video {
-      position: absolute;
+    /* Full-screen background wallpaper */
+    .background {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('img.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1; /* Ensure it stays behind content */
     }
 
     /* Centered content */
@@ -140,10 +143,8 @@
   </style>
 </head>
 <body>
-  <!-- Background Video -->
-   <div class="background">
-    <img src="https://imgs.search.brave.com/fm4GNiJiv6EoqMOUbJXiusbDdUaQfsCSvLJWm_nPOAo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDY0Nzc2/NTMuanBn">
-   </div>
+  <!-- Background Wallpaper -->
+  <div class="background"></div>
 
   <!-- Main Content -->
   <div class="content">
